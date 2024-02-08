@@ -1,0 +1,6 @@
+{
+  "tasks": {
+    "start": "deno run --unstable-cron -A main.ts"
+  },
+  "lock": false
+}
