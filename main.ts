@@ -57,6 +57,7 @@ async function sendToSlack() {
     if (statusEl.status === null || !("name" in statusEl.status)) return;
     const status = statusEl.status.name;
 
+    if (nameEl.title.length === 0) return;
     const text = nameEl.title[0].plain_text;
 
     if (status === "未着手") {
@@ -110,4 +111,11 @@ async function sendToSlack() {
   console.debug(slackRes);
 }
 
-Deno.cron("Send Todo to slack", { minute: { every: 23 } }, sendToSlack);
+Deno.cron(
+  "Send Todo to slack",
+  { minute: { every: 23 } },
+  { backoffSchedule: [1000, 5000, 10000] },
+  sendToSlack,
+);
+
+// sendToSlack();
