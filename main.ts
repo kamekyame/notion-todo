@@ -110,4 +110,4 @@ async function sendToSlack() {
   console.debug(slackRes);
 }
 
-Deno.cron("Send Todo to slack", "* * * * *", sendToSlack);
+Deno.cron("Send Todo to slack", { minute: { every: 23 } }, sendToSlack);
