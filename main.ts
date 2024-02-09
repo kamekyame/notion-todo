@@ -113,7 +113,7 @@ async function sendToSlack() {
 
 Deno.cron(
   "Send Todo to slack",
-  { minute: { every: 23 } },
+  "0 23 * * *",
   { backoffSchedule: [1000, 5000, 10000] },
   sendToSlack,
 );
