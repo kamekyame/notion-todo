@@ -1,7 +1,7 @@
-import { Client, isFullPageOrDatabase } from "npm:@notionhq/client";
-import { SlackAPI } from "https://deno.land/x/deno_slack_api@2.1.1/mod.ts";
+import { Client, isFullPageOrDataSource } from "@notionhq/client";
+import { SlackAPI } from "@slack/api";
 
-import "https://deno.land/std@0.214.0/dotenv/load.ts";
+// import "https://deno.land/std@0.214.0/dotenv/load.ts";
 
 /** 文字列のリストをSlackのリッチエディタ用のリストに変換する関数 */
 function strings2listElements(list: string[]) {
@@ -23,8 +23,8 @@ async function sendToSlack() {
   });
 
   // NotionのTodoデータベースからタスクを取得
-  const databaseRes = await notion.databases.query({
-    database_id: Deno.env.get("NOTION_DATABASE_ID")!,
+  const databaseRes = await notion.dataSources.query({
+    data_source_id: Deno.env.get("NOTION_DATABASE_ID")!,
     filter: {
       or: [
         {
@@ -44,7 +44,7 @@ async function sendToSlack() {
   const inProgressList: string[] = [];
 
   databaseRes.results.forEach((result) => {
-    if (!isFullPageOrDatabase(result)) return;
+    if (!isFullPageOrDataSource(result)) return;
 
     const nameEl = result.properties.Name;
     const statusEl = result.properties.ステータス;

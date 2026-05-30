@@ -1,6 +1,10 @@
 {
   "tasks": {
-    "start": "deno run --unstable-cron -A main.ts"
+    "start": "deno run --unstable-cron -A --env main.ts"
   },
-  "lock": false
+  "lock": false,
+  "imports": {
+    "@slack/api": "jsr:@slack/api@^2.9.3",
+    "@notionhq/client": "npm:@notionhq/client@^5.22.0"
+  }
 }
