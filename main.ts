@@ -118,4 +118,6 @@ Deno.cron(
   sendToSlack,
 );
 
+Deno.serve(() => new Response("notion-todo"));
+
 // sendToSlack();
